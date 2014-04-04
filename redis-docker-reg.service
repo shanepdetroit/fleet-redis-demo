@@ -1,5 +1,6 @@
 [Unit]
 Description=Register on A
+After=redis-demo.service
 After=etcd-amb-redis.service
 
 [Service]
