@@ -1,6 +1,5 @@
 [Unit]
 Description=Ambassador on B
-Before=redis-dyn-amb.service
 
 [Service]
 ExecStart=/usr/bin/docker run --rm --name %n polvi/simple-amb 172.17.42.1:4001
