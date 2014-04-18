@@ -6,7 +6,7 @@ After=redis-demo.service
 After=etcd-amb-redis.service
 
 [Service]
-ExecStartPre=sleep 10
+ExecStartPre=/usr/bin/docker port redis-demo.service 6379
 ExecStart=/usr/bin/docker run --link etcd-amb-redis.service:etcd -e DOCKER_HOST=tcp://172.17.42.1:4243 --rm --name %n polvi/docker-register redis-demo.service 6379 redis-A
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
