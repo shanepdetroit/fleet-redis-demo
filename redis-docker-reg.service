@@ -3,6 +3,7 @@ Description=Register on A
 After=etcd-amb-redis.service
 
 [Service]
+ExecStartPre=sleep 10
 ExecStart=/usr/bin/docker run --link etcd-amb-redis.service:etcd -e DOCKER_HOST=tcp://172.17.42.1:4243 --rm polvi/docker-register redis-demo.service 6379 redis-A
 Restart=on-failure
 RestartSec=5s
