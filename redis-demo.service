@@ -7,3 +7,5 @@ ExecStartPre=/usr/bin/docker pull crosbymichael/redis
 # %n is the name of the unit
 ExecStart=/usr/bin/docker run --rm --name %n -p ${COREOS_PUBLIC_IPV4}::6379 crosbymichael/redis
 ExecStop=/usr/bin/docker stop -t 3 %n
+Restart=on-failure
+RestartSec=5s
