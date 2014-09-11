@@ -11,4 +11,4 @@ Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-X-ConditionMachineOf=etcd-amb-redis2.service
+MachineOf=etcd-amb-redis2.service
