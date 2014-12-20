@@ -10,4 +10,4 @@ Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-X-Conflicts=redis-demo.service
+Conflicts=redis-demo.service

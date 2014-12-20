@@ -13,4 +13,4 @@ Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-X-ConditionMachineOf=redis-demo.service
+MachineOf=redis-demo.service
