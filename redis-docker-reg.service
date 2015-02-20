@@ -6,11 +6,11 @@ After=etcd-amb-redis.service
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/docker-register
 ExecStartPre=/usr/bin/docker port redis-demo.service 6379
-ExecStart=/usr/bin/docker run --link etcd-amb-redis.service:etcd -e DOCKER_HOST=tcp://172.17.42.1:2375 --rm --name %n polvi/docker-register redis-demo.service 6379 redis-A
+ExecStart=/usr/bin/docker run --link etcd-amb-redis.service:etcd -e DOCKER_HOST=tcp://${COREOS_PRIVATE_IPV4}:2375 --rm --name %n polvi/docker-register redis-demo.service 6379 redis-A
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-MachineOf=redis-demo.service
+MachineOf=redis-demo@.service
