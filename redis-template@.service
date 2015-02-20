@@ -1,11 +1,11 @@
 [Unit]
-Description=Redis on A
+Description=Redis Template
 
 [Service]
 EnvironmentFile=/etc/environment
 ExecStartPre=/usr/bin/docker pull crosbymichael/redis
 # %n is the name of the unit
-ExecStart=/usr/bin/docker run --rm --name %n -p ${COREOS_PUBLIC_IPV4}::6379 crosbymichael/redis
+ExecStart=/usr/bin/docker run --rm --name %n -p ${COREOS_PRIVATE_IPV4}::6379 crosbymichael/redis
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
