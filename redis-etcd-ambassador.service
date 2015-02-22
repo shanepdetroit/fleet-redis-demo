@@ -1,6 +1,8 @@
 [Unit]
 Description=Etcd Ambassador on B
 After=etcd-amb-redis2.service
+After=docker.service
+Requires=docker.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
