@@ -7,9 +7,9 @@ Requires=web@%i.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
-ExecStart=/usr/bin/docker run --link web@%i.service:web --rm --name redis-ambassador -p 127.0.0.1::6379 polvi/dynamic-etcd-amb redis-1 6379
-ExecStop=/usr/bin/docker stop -t 3 redis-ambassador
-ExecStopPost=/usr/bin/docker rm redis-ambassador
+ExecStart=/usr/bin/docker run --link web@%i.service:web --rm --name redis-ambassador%i -p 127.0.0.1::6379 polvi/dynamic-etcd-amb redis-1 6379
+ExecStop=/usr/bin/docker stop -t 3 redis-ambassador%i
+ExecStopPost=/usr/bin/docker rm redis-ambassador%i
 Restart=on-failure
 RestartSec=5s
 
