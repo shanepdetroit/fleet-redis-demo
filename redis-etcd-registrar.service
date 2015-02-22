@@ -1,5 +1,7 @@
 [Unit]
 Description=Register on A
+After=docker.service
+Requires=docker.service
 BindsTo=redis-demo@%i.service
 After=redis-demo@%i.service
 
