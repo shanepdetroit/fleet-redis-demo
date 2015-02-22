@@ -2,6 +2,8 @@
 Description=Redis Etcd Ambassador
 After=docker.service
 Requires=docker.service
+After=web@%i.service
+Requires=web@%i.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
