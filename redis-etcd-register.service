@@ -2,10 +2,9 @@
 Description=Register on A
 After=docker.service
 Requires=docker.service
-BindsTo=redis-demo@%i.service
-After=redis-demo@%i.service
-
-After=etcd-amb-redis.service
+BindsTo=redis-server-master@%i.service
+After=redis-server-master@%i.service
+After=redis-etcd-ambassador.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/docker-register
@@ -17,4 +16,4 @@ Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-MachineOf=redis-demo@%i.service
+MachineOf=redis-server-master@%i.service
