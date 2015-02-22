@@ -12,3 +12,6 @@ ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
 RestartSec=5s
+
+[X-Fleet]
+Conflicts=apache@*.service
