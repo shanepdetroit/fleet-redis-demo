@@ -9,7 +9,7 @@ After=redis-etcd-ambassador.service
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/docker-register
 ExecStartPre=/usr/bin/docker port redis-demo.service 6379
-ExecStart=/usr/bin/docker run --link etcd-amb-redis.service:etcd -e DOCKER_HOST=tcp://${COREOS_PRIVATE_IPV4}:2375 --rm --name %n polvi/docker-register redis-demo.service 6379 redis-%i
+ExecStart=/usr/bin/docker run --link redis-etcd-ambassador.service:etcd -e DOCKER_HOST=tcp://${COREOS_PRIVATE_IPV4}:2375 --rm --name %n polvi/docker-register redis-server-master@%i.service 6379 redis-%i
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
