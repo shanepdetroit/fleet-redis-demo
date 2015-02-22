@@ -1,5 +1,7 @@
 [Unit]
 Description=Redis Template
+After=docker.service
+Requires=docker.service
 
 [Service]
 EnvironmentFile=/etc/environment
