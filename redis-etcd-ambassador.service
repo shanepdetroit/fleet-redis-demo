@@ -1,16 +1,15 @@
 [Unit]
-Description=Etcd Ambassador on B
-After=etcd-amb-redis2.service
+Description=Redis Etcd Ambassador
 After=docker.service
 Requires=docker.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
-ExecStart=/usr/bin/docker run --link etcd-amb-redis2.service:etcd --rm --name %n -p 127.0.0.1::6379 polvi/dynamic-etcd-amb redis-1 6379
+ExecStart=/usr/bin/docker run --link web@%i.service:web --rm --name %n -p 127.0.0.1::6379 polvi/dynamic-etcd-amb redis-1 6379
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-MachineOf=etcd-amb-redis2.service
+MachineOf=web@%i.service
