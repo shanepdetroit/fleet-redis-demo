@@ -8,9 +8,9 @@ After=redis-server-master@%i.service
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/docker-register
 ExecStartPre=/usr/bin/docker port redis-demo.service 6379
-ExecStart=/usr/bin/docker run -e DOCKER_HOST=tcp://${COREOS_PRIVATE_IPV4}:2375 --rm --name %n polvi/docker-register redis-server-master@%i.service 6379 redis-%i
-ExecStop=/usr/bin/docker stop -t 3 %n
-ExecStopPost=/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run -e DOCKER_HOST=tcp://${COREOS_PRIVATE_IPV4}:2375 --rm --name redis-register polvi/docker-register redis-server-master@%i.service 6379 redis-%i
+ExecStop=/usr/bin/docker stop -t 3 redis-register
+ExecStopPost=/usr/bin/docker rm redis-register
 Restart=on-failure
 RestartSec=5s
 
