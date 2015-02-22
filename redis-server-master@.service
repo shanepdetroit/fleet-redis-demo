@@ -14,4 +14,4 @@ Restart=on-failure
 RestartSec=5s
 
 [X-Fleet]
-Conflicts=apache@*.service
+Conflicts=redis-server-master@*.service
