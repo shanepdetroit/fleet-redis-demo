@@ -5,12 +5,12 @@ After=redis-server-master@%i.service
 Requires=redis-server-master@%i.service
 
 [Service]
-ExecStartPre=-/usr/bin/docker kill redis-register-proxy%i
-ExecStartPre=-/usr/bin/docker rm redis-register-proxy%i
+ExecStartPre=-/usr/bin/docker kill redis-register-proxy
+ExecStartPre=-/usr/bin/docker rm redis-register-proxy
 ExecStartPre=-/usr/bin/docker pull polvi/simple-amb
-ExecStart=/usr/bin/docker run --name redis-register-proxy%i polvi/simple-amb 172.17.42.1:4001
-ExecStop=-/usr/bin/docker stop -t 10 redis-register-proxy%i
-ExecStopPost=-/usr/bin/docker rm redis-register-proxy%i
+ExecStart=/usr/bin/docker run --name redis-register-proxy polvi/simple-amb 172.17.42.1:4001
+ExecStop=-/usr/bin/docker stop -t 10 redis-register-proxy
+ExecStopPost=-/usr/bin/docker rm redis-register-proxy
 Restart=on-failure
 RestartSec=5s
 
