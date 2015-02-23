@@ -1,4 +1,6 @@
 [Unit]
+After=docker.service
+Requires=docker.service
 After=redis-server-master@%i.service
 Requires=redis-server-master@%i.service
 
