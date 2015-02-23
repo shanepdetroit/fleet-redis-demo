@@ -1,4 +1,6 @@
 [Unit]
+After=redis-server-master@%i.service
+Requires=redis-server-master@%i.service
 After=redis-register-proxy@%i.service
 Requires=redis-register-proxy@%i.service
 
