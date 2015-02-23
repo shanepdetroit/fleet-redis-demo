@@ -6,8 +6,8 @@ Requires=redis-register-proxy@%i.service
 
 [Service]
 ExecStartPre=/usr/bin/docker pull polvi/docker-register
-ExecStartPre=/usr/bin/docker port redis-demo.service 6379
-ExecStart=/usr/bin/docker run --link redis-register-proxy%i:etcd -e DOCKER_HOST=tcp://172.17.42.1:2375 --rm --name redis-register%i polvi/docker-register redis-demo.service 6379 redis-A
+ExecStartPre=/usr/bin/docker port redis-master%i 6379
+ExecStart=/usr/bin/docker run --link redis-register-proxy%i:etcd -e DOCKER_HOST=tcp://172.17.42.1:2375 --rm --name redis-register%i polvi/docker-register redis-master-server@%i.service 6379 redis-A
 ExecStop=/usr/bin/docker stop -t 3 %n
 ExecStopPost=/usr/bin/docker rm %n
 Restart=on-failure
