@@ -1,3 +1,7 @@
+[Unit]
+After=redis-server-master@%i.service
+Requires=redis-server-master@%i.service
+
 [Service]
 ExecStartPre=-/usr/bin/docker kill redis-register-proxy%i
 ExecStartPre=-/usr/bin/docker rm redis-register-proxy%i
