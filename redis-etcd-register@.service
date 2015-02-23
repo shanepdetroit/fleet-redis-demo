@@ -2,7 +2,7 @@
 After=redis-etcd-register-proxy@%i.service
 
 [Service]
-ExecStart=/usr/bin/docker run -link redis-etcd-register-proxy@%i.service:etcd -v /var/run/docker.sock:/var/run/docker.sock -rm polvi/docker-register redis-demo.service 6379 redis-A
+ExecStart=/usr/bin/docker run -link redis-etcd-register-proxy@%i.service:etcd -v /var/run/docker.sock:/var/run/docker.sock -rm polvi/docker-register redis-server-master@%i.service 6379 redis-A
 
 [X-Fleet]
 X-ConditionMachineOf=redis-server-master@%i.service
