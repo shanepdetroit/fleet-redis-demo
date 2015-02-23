@@ -1,17 +1,11 @@
 [Unit]
-Description=Redis Etcd Ambassador
+Description=Vulcan
 After=docker.service
-Requires=docker.service
-After=web@%i.service
-Requires=web@%i.service
 
 [Service]
-ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
-ExecStart=/usr/bin/docker run --link web@%i.service:web --rm --name redis-ambassador%i -p 127.0.0.1::6379 polvi/dynamic-etcd-amb redis-1 6379
-ExecStop=/usr/bin/docker stop -t 3 redis-ambassador%i
-ExecStopPost=/usr/bin/docker rm redis-ambassador%i
-Restart=on-failure
-RestartSec=5s
-
-[X-Fleet]
-MachineOf=web@%i.service
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill vulcan1
+ExecStartPre=-/usr/bin/docker rm vulcan1
+ExecStartPre=/usr/bin/docker pull mailgun/vulcand:v0.7.0
+ExecStart=/usr/bin/docker run --rm --name vulcan1 -p 80:80 -p 8182:8182 mailgun/vulcand:v0.7.0 /go/bin/vulcand -apiInterface=0.0.0.0 -interface=0.0.0.0 -etcd=http://172.17.42.1:4001 -port=80 -apiPort=8182
+ExecStop=/usr/bin/docker kill vulcan1
