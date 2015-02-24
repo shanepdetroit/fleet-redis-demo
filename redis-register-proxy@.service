@@ -8,9 +8,8 @@ Requires=redis-server-master@%i.service
 ExecStartPre=-/usr/bin/docker kill redis-register-proxy
 ExecStartPre=-/usr/bin/docker rm redis-register-proxy
 ExecStartPre=-/usr/bin/docker pull progrium/ambassadord
-ExecStart=/usr/bin/docker run --name redis-register-proxy progrium/ambassadord 172.17.42.1:4001
+ExecStart=/usr/bin/docker run -d --rm --name redis-register-proxy progrium/ambassadord 172.17.42.1:4001
 ExecStop=-/usr/bin/docker stop -t 10 redis-register-proxy
-ExecStopPost=-/usr/bin/docker rm redis-register-proxy
 Restart=on-failure
 RestartSec=5s
 
