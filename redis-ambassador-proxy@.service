@@ -3,8 +3,8 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStartPre=/usr/bin/docker pull polvi/simple-amb
-ExecStart=/usr/bin/docker run --rm --name redis-ambassador-proxy%i polvi/simple-amb 172.17.42.1:4001
+ExecStartPre=/usr/bin/docker pull progrium/ambassadord
+ExecStart=/usr/bin/docker run --rm --name redis-ambassador-proxy%i progrium/ambassadord 172.17.42.1:4001
 ExecStop=/usr/bin/docker stop -t 3 redis-ambassador-proxy%i
 ExecStopPost=/usr/bin/docker rm redis-ambassador-proxy%i
 Restart=on-failure
