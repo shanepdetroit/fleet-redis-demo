@@ -9,7 +9,7 @@ ExecStartPre=/usr/bin/docker pull crosbymichael/redis
 ExecStartPre=-/usr/bin/docker kill redis-master%i
 ExecStartPre=-/usr/bin/docker rm redis-master%i
 # %n is the name of the unit
-ExecStart=/usr/bin/docker run --rm --name redis-master%i -p ${COREOS_PRIVATE_IPV4}::%i crosbymichael/redis
+ExecStart=/usr/bin/docker run --rm --name redis-master%i -p ${COREOS_PRIVATE_IPV4}:6379:6379 crosbymichael/redis
 ExecStop=/usr/bin/docker stop -t 3 redis-master%i
 Restart=on-failure
 RestartSec=5s
