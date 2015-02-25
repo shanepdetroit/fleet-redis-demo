@@ -7,7 +7,7 @@ EnvironmentFile=/etc/environment
 ExecStartPre=/usr/bin/docker pull ctlc/ambassador
 ExecStartPre=-/usr/bin/docker kill redis-ambassador-proxy%i
 ExecStartPre=-/usr/bin/docker rm redis-ambassador-proxy%i
-ExecStart=/usr/bin/docker run --rm --name redis-ambassador-proxy%i -p ${COREOS_PRIVATE_IPV4}:6379:6379 -e REDIS_PORT_6379_TCP=tcp://172.17.42.1:6379 ctlc/ambassador
+ExecStart=/usr/bin/docker run --rm --name redis-ambassador-proxy%i -p 6379:6379 -e REDIS_PORT_6379_TCP=tcp://172.17.42.1:6379 ctlc/ambassador
 ExecStop=/usr/bin/docker stop -t 3 redis-ambassador-proxy%i
 Restart=on-failure
 RestartSec=5s
