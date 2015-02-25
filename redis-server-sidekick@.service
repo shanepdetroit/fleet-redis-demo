@@ -9,7 +9,7 @@ ExecStartPre=/usr/bin/docker pull ctlc/ambassador
 ExecStartPre=-/usr/bin/docker kill redis-sidekick%i
 ExecStartPre=-/usr/bin/docker rm redis-sidekick%i
 # %n is the name of the unit
-ExecStart=/usr/bin/docker run --rm --link redis-master%i:redis --name redis-sidekick%i -p ${COREOS_PRIVATE_IPV4}:6379:6379 ctlc/ambassador
+ExecStart=/usr/bin/docker run --rm --link redis-master%i:redis --name redis-sidekick%i -p 6379:6379 ctlc/ambassador
 ExecStop=/usr/bin/docker stop -t 3 redis-sidekick%i
 Restart=on-failure
 RestartSec=5s
